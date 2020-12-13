@@ -3,13 +3,19 @@
 import { readFileSync } from 'fs'
 
 function parseData(arr: string[]) {
-    let dict = {}
-    let count = 0
+    let chars = new Set()
+    let total = 0
     arr.forEach((line) => {
-        console.log(line)
-        count++
+        if(line === '') {
+            total += chars.size
+            chars.clear()
+        } else {
+            line.split('').forEach((ch) => {
+                chars.add(ch)
+            })
+        }
     })
-    return count
+    return total
 }
 
 function main() {
