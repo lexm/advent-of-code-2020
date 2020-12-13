@@ -2,14 +2,27 @@
 
 import { readFileSync } from 'fs'
 
+function parseSeatId(line: string) {
+    let seatId = line.split('').map((ch) => {
+        if(ch === 'F' || ch === 'L') return '0'
+        if(ch === 'B' || ch === 'R') return '1'
+    }).join('')
+    let seat = parseInt(seatId, 2)
+    if(isNaN(seat)) return 0
+    return seat
+}
+
 function parseData(arr: string[]) {
     let dict = {}
-    let count = 0
+    let max = 0
     arr.forEach((line) => {
-        console.log(line)
-        count++
+        let seat += parseSeatId(line)
+        if(seat > max) seat = max
+        if 
+        // console.log(line)
+        // count++
     })
-    return count
+    return max
 }
 
 function main() {
