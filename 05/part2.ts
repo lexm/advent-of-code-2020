@@ -14,15 +14,17 @@ function parseSeatId(line: string) {
 
 function parseData(arr: string[]) {
     let dict = {}
+    let total = 0
     let max = 0
+    let min = Number.MAX_SAFE_INTEGER
     arr.forEach((line) => {
-        let seat += parseSeatId(line)
-        if(seat > max) seat = max
-        if 
-        // console.log(line)
-        // count++
+        let seat = parseSeatId(line)
+        if(seat > max) max = seat
+        if(seat && seat < min) min = seat
+        total += seat
     })
-    return max
+    let fullTotal = ((max + min) * (max - min + 1)) / 2
+    return fullTotal - total
 }
 
 function main() {
