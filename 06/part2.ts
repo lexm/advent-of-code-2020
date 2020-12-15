@@ -2,14 +2,38 @@
 
 import { readFileSync } from 'fs'
 
-function parseData(arr: string[]) {
-    let dict = {}
-    let count = 0
+function intersection(set1: Set<string>, set2: Set<string>) {
+    let result = new Set<string>()
+    for (let ele of Array.from(set2)) {
+        if(set1.has(ele)) {
+            result.add(ele)
+        }
+    }
+    return result
+}
+
+function parseData(arr: string[]): number {
+//    let charSets = new Set()[]
+    let intersect = new Set<string>()
+    let total = 0
+    let idx = 0
     arr.forEach((line) => {
-        console.log(line)
-        count++
+        if(line === '') {
+            total += intersect.size
+            intersect.clear()
+        } else {
+            let qs = new Set<string>()
+            line.split('').forEach((ch) => {
+                qs.add(ch)
+            })
+            if(!idx) {
+                intersect = qs
+            } else {
+                intersect = intersection(intersect, qs)
+            }
+        }
     })
-    return count
+    return total
 }
 
 function main() {
